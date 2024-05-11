@@ -1,0 +1,10 @@
+h1 {
+    text-align: center;
+}
+
+.media-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+

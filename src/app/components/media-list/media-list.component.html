@@ -1,0 +1,6 @@
+<h1>List of Movies</h1>
+
+<div class="media-list-container">
+   <app-media *ngFor="let media of mediaList" [media]="media" routerLink="{{media.id}}"></app-media>
+</div>
+
