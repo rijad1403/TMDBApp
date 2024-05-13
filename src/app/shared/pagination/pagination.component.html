@@ -1,0 +1,16 @@
+<div class="pagination">
+  <div>
+    <button class="to-page" [disabled]="pageNumber == 1" (click)="goToPage(pageNumber - 1)">
+      &laquo;
+    </button>
+    <span>Page {{ pageNumber }} of {{ totalPages }}</span>
+    <button class="to-page" [disabled]="pageNumber == totalPages" (click)="goToPage(pageNumber + 1)">
+      &raquo;
+    </button>
+  </div>
+  <div>
+    <span>Go to page</span>
+    <input type="number" class="page-number-input" [min]="1" [max]="totalPages" #pageNumberInput
+      (keyup)="emitPageNumber($event, pageNumberInput.value)" />
+  </div>
+</div>

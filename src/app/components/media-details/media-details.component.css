@@ -1,0 +1,23 @@
+h1 {
+  text-align: center;
+}
+
+.media-details-container {
+  width: 70%;
+  margin: 20px auto;
+}
+
+.back-button {
+  display: block;
+  background-color: var(--black);
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+  border-radius: 0.5em;
+  margin: 1em 0;
+}
+
+.back-button:hover {
+  color: var(--yellow);
+  cursor: pointer;
+}

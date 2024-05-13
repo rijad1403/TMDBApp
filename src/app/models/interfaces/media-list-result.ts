@@ -1,6 +1,6 @@
 import { Media } from './media';
 
-export interface MediaListResponse {
+export interface MediaListResult {
   page: number;
   total_pages: number;
   total_results: number;

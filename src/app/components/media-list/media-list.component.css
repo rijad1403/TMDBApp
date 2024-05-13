@@ -1,10 +1,27 @@
 h1 {
-    text-align: center;
+  text-align: center;
+}
+
+small {
+  color: gray;
+}
+
+.media-list-search-bar {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 .media-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
+.media-search-container {
+  width: 80%;
+  margin: auto;
+}

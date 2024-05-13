@@ -1,6 +1,11 @@
-<h1>List of Movies</h1>
-
-<div class="media-list-container">
-   <app-media *ngFor="let media of mediaList" [media]="media" routerLink="{{media.id}}"></app-media>
+<h1>{{mediaHeader}}</h1>
+<div class="media-search-container">
+   <input  type="text" class="media-list-search-bar" placeholder="{{searchPlaceholder}}" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" >
+   <small>{{infoText}}</small>
 </div>
+<app-loader *ngIf="dataLoading"></app-loader>
+<div class="media-list-container" *ngIf="!dataLoading">
+   <app-media *ngFor="let media of mediaList" [media]="media" routerLink="{{media.id}}" [queryParams]="!showTopRatedMedia ? {search: searchText, pageNumber} : {}"></app-media>
+</div>
+<app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageNumberEvent)="onPageNumberEmitted($event)" *ngIf="!dataLoading && mediaList.length > 0 && !showTopRatedMedia"></app-pagination>
 

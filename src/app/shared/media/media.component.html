@@ -1,0 +1,17 @@
+<div class="media">
+    <img *ngIf="!onDetailsPage" src="{{media.poster_path ? imageUrl + media.poster_path : noPosterFoundPath}}"
+        alt="{{ media.original_name ?? media.original_title }}" />
+    <img *ngIf="onDetailsPage && !mediaTrailerYTKey"
+        src="{{media.backdrop_path ? imageUrl + media.backdrop_path: noBackdropFoundPath}}"
+        alt="{{ media.original_name ?? media.original_title }}" />
+    <iframe *ngIf="onDetailsPage && mediaTrailerYTKey" [src]="safeYTVideoUrl" class="video-player"></iframe>
+    <h2>{{ media.original_name ?? media.original_title }}</h2>
+    <h4>User score: {{ media.vote_average.toFixed(1) }}%</h4>
+    <p *ngIf="onDetailsPage">{{ media.overview }}</p>
+    <ng-container *ngIf="onDetailsPage && media.genres.length > 0">
+        <h4>Genres:</h4>
+        <ul>
+            <li *ngFor="let genre of media.genres">{{ genre.name }}</li>
+        </ul>
+    </ng-container>
+</div>

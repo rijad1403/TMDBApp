@@ -1,1 +1,11 @@
-<app-media [media]="media"></app-media>
+<app-loader *ngIf="dataLoading"></app-loader>
+<ng-container *ngIf="!dataLoading">
+  <h1>{{ media.original_name ?? media.original_title }}</h1>
+  <div class="media-details-container">
+    <button routerLink="/media/{{ mediaType }}"
+      [queryParams]="searchText && pageNumber ? { search: searchText, pageNumber } : {}" class="back-button">
+      &laquo; Back </button>
+    <app-media [media]="media" [mediaTrailerYTKey]="mediaTrailerYTKey" [onDetailsPage]="true"
+      class="media-details"></app-media>
+  </div>
+</ng-container>

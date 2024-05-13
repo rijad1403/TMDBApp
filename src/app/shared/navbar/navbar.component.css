@@ -1,0 +1,22 @@
+ul {
+  list-style-type: none;
+  padding: 1em;
+  background-color: var(--black);
+  margin: 0;
+}
+
+li {
+  display: inline;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+}
+
+li.nav-link:hover {
+  cursor: pointer;
+}
+
+li.nav-link:hover,
+.link-active {
+  color: var(--yellow);
+}
