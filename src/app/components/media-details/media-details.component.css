@@ -3,7 +3,7 @@ h1 {
 }
 
 .media-details-container {
-  width: 70%;
+  width: 80%;
   margin: 20px auto;
 }
 
@@ -20,4 +20,16 @@ h1 {
 .back-button:hover {
   color: var(--yellow);
   cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .media-details-container {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .back-button {
+    padding: .7em;
+  }
 }

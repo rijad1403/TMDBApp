@@ -22,7 +22,6 @@ export class MediaComponent implements OnChanges {
   public noPosterFoundPath: string = '../../../assets/no-poster-found.jpg';
   public noBackdropFoundPath: string = '../../../assets/no-backdrop-found.jpg';
 
-
   public constructor(private sanitizer: DomSanitizer) {
   }
 

@@ -25,3 +25,14 @@ small {
   width: 80%;
   margin: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  .media-search-container {
+    width: 90%;
+  }
+
+  .media-list-search-bar {
+    padding: 6px 10px;
+    font-size: .7rem;
+  }
+}

@@ -4,7 +4,8 @@
   <div class="media-details-container">
     <button routerLink="/media/{{ mediaType }}"
       [queryParams]="searchText && pageNumber ? { search: searchText, pageNumber } : {}" class="back-button">
-      &laquo; Back </button>
+      Go back
+    </button>
     <app-media [media]="media" [mediaTrailerYTKey]="mediaTrailerYTKey" [onDetailsPage]="true"
       class="media-details"></app-media>
   </div>

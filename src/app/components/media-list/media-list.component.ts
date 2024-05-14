@@ -24,6 +24,7 @@ export class MediaListComponent implements OnDestroy {
   public showTopRatedMedia: boolean = true;
 
   private routeSubscription: Subscription;
+  private typingTimer = setTimeout(() => { });
 
   public constructor(
     private mediaService: MediaService,
@@ -35,7 +36,6 @@ export class MediaListComponent implements OnDestroy {
       this.checkQueryParams();
       if (this.paramsValid()) {
         this.setHeaderAndPlaceholderValues();
-
         this.getMediaList();
       } else {
         this.router.navigateByUrl('page-not-found');
@@ -52,9 +52,17 @@ export class MediaListComponent implements OnDestroy {
   }
 
   public onSearchChange(): void {
-    this.pageNumber = 1;
-    this.dataLoading = true;
-    this.getMediaList();
+    clearTimeout(this.typingTimer);
+    if (this.searchText.length > 2) {
+      this.typingTimer = setTimeout(() => {
+        this.dataLoading = true;
+        this.pageNumber = 1;
+        this.getMediaListBySearchText();
+      }, 1000);
+    } else {
+      this.dataLoading = true;
+      this.getTopRatedMediaList();
+    }
   }
 
   public onPageNumberEmitted($event: number): void {
@@ -93,30 +101,32 @@ export class MediaListComponent implements OnDestroy {
   private getTopRatedMediaList(): void {
     this.mediaService
       .getTopRatedMediaList(this.mediaType as MediaType)
-      .subscribe((data) => {
-        this.mediaList = data.results.slice(0, 10);
-        this.showTopRatedMedia = true;
-        this.setInfoText();
-        this.dataLoading = false;
-      });
+      .subscribe(
+        (mediaListResult) => {
+          this.mediaList = mediaListResult.results.slice(0, 10);
+          this.showTopRatedMedia = true;
+          this.setInfoText();
+          this.dataLoading = false;
+        },
+        () => this.router.navigateByUrl('/page-not-found')
+      );
   }
 
   private getMediaListBySearchText(): void {
     this.mediaService
-      .getMediaListBySearchText(
-        this.mediaType as MediaType,
-        this.searchText,
-        this.pageNumber
-      )
-      .subscribe((data) => {
-        this.mediaList = data.results;
-        this.pageNumber = data.page;
-        this.totalPages = data.total_pages;
-        this.totalResults = data.total_results;
-        this.showTopRatedMedia = false;
-        this.setInfoText();
-        this.dataLoading = false;
-      });
+      .getMediaListBySearchText(this.mediaType as MediaType, this.searchText, this.pageNumber)
+      .subscribe(
+        (mediaListResult) => {
+          this.mediaList = mediaListResult.results;
+          this.pageNumber = mediaListResult.page;
+          this.totalPages = mediaListResult.total_pages;
+          this.totalResults = mediaListResult.total_results;
+          this.showTopRatedMedia = false;
+          this.setInfoText();
+          this.dataLoading = false;
+        },
+        () => this.router.navigateByUrl('/page-not-found')
+      );
   }
 
   private checkQueryParams(): void {

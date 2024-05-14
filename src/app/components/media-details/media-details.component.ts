@@ -52,17 +52,18 @@ export class MediaDetailsComponent implements OnInit {
     this.dataLoading = true;
     this.mediaService
       .getMediaById(mediaType as MediaType, mediaId)
-      .subscribe(media => {
-        this.media = media;
-        this.mediaService.getVideosByMediaId(mediaType as MediaType, mediaId)
-          .subscribe(mediaVideosResult => {
-            const mediaVideos = mediaVideosResult.results;
-            this.mediaTrailerYTKey = mediaVideos.find(mediaVideo =>
-              mediaVideo.site.toLowerCase() == 'youtube' &&
-              mediaVideo.type.toLowerCase() == 'trailer')?.key;
-            this.dataLoading = false;
-          });
-      });
+      .subscribe(
+        media => {
+          this.media = media;
+          this.mediaService.getVideosByMediaId(mediaType as MediaType, mediaId)
+            .subscribe(mediaVideosResult => {
+              const mediaVideos = mediaVideosResult.results;
+              this.mediaTrailerYTKey = mediaVideos.find(mediaVideo =>
+                mediaVideo.site.toLowerCase() == 'youtube' &&
+                mediaVideo.type.toLowerCase() == 'trailer')?.key;
+              this.dataLoading = false;
+            });
+        }, () => this.router.navigateByUrl('/page-not-found'));
   }
 
 }
