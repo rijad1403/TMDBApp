@@ -45,6 +45,7 @@ export class MediaListComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
+    clearTimeout(this.typingTimer);
   }
 
   private paramsValid(): boolean {
